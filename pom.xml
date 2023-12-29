@@ -48,6 +48,18 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- Spring boot Lombok is nothing but a small library that was used to 
+		reduce the unused code from the java applications. It is automatically generating 
+		the getter and setter method for the class object by using Lombok annotation. 
+		Using it, we can hook in by using the API of the annotation processor. -->
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
