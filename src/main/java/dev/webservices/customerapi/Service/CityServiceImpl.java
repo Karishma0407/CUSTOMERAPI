@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import dev.webservices.customerapi.Entity.City;
 import dev.webservices.customerapi.Repository.CityRepository;
+import dev.webservices.customerapi.Repository.CountryRepository;
 
 @Service
 public class CityServiceImpl implements CityService {
@@ -14,8 +15,17 @@ public class CityServiceImpl implements CityService {
     @Autowired
     private CityRepository cityRepository;
 
+    @Autowired
+    private CountryRepository countryRepository;
+
     @Override
     public City save(City city) {
+
+        // do we have country?
+        if (city.getCountry() != null) {
+            // if yes, save it
+            countryRepository.save(city.getCountry());
+        }
         return cityRepository.save(city);
     }
 
