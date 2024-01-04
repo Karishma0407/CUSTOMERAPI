@@ -16,7 +16,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    // save customer data
+    // Save customer data
     @PostMapping("/")
     public void save(@RequestBody Customer customer) {
         customerService.save(customer);

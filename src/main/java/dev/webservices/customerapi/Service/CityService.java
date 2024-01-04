@@ -10,7 +10,7 @@ public interface CityService {
 
     Optional<City> findById(Long id);
 
-    void update(Long id);
+    void update(City city);
 
     void delete(Long id);
 

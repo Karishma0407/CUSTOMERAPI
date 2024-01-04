@@ -35,9 +35,9 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public void update(Long id) {
-        Optional<City> customerCity = cityRepository.findById(id);
-        customerCity.ifPresent(city -> cityRepository.save(city));
+    public void update(City city) {
+        Optional<City> customerCity = cityRepository.findById(city.getId());
+        customerCity.ifPresent(Newcity -> cityRepository.save(Newcity));
     }
 
     @Override
