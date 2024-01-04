@@ -10,6 +10,8 @@ public interface CountryService {
 
     Optional<Country> findById(Long id);
 
+    Optional<Country> findByName(String name);
+
     void update(Long id);
 
     void delete(Long id);

@@ -16,12 +16,26 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country save(Country country) {
-        return countryRepository.save(country);
+
+        // Check if a country with the same name already exists
+        Optional<Country> existingCountry = countryRepository.findByName(country.getName());
+
+        if (existingCountry.isPresent()) {
+            System.out.println("Country already exist!");
+            return null;
+        } else {
+            return countryRepository.save(country);
+        }
     }
 
     @Override
     public Optional<Country> findById(Long id) {
         return countryRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Country> findByName(String name) {
+        return countryRepository.findByName(name);
     }
 
     @Override
