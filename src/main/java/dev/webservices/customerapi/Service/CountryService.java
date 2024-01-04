@@ -12,7 +12,7 @@ public interface CountryService {
 
     Optional<Country> findByName(String name);
 
-    void update(Long id);
+    void update(Country country);
 
     void delete(Long id);
 

@@ -26,15 +26,22 @@ public class CustomerController {
     // Find customer using Id
     @GetMapping("/")
     public Customer getCustomer(@RequestParam Long id) {
-        return customerService.findById(id).get();
+
+        // Check if the customer with the given ID exists
+        Optional<Customer> customerId = customerService.findById(id);
+        if (customerId.isPresent()) {
+            return customerService.findById(id).get();
+        } else {
+            return null;
+        }
     }
 
     // Update customer data
     @PutMapping("/")
     public String update(@RequestBody Customer customer) {
-        Optional<Customer> customerId = customerService.findById(customer.getId());
 
         // Check if the customer with the given ID exists
+        Optional<Customer> customerId = customerService.findById(customer.getId());
         if (customerId.isPresent()) {
             customerService.update(customer);
             return "Customer record updated successfully!";
@@ -46,7 +53,14 @@ public class CustomerController {
     // Delete customer data
     @DeleteMapping("/")
     public String delete(Long id) {
-        customerService.delete(id);
-        return "Customer record deleted successfully!";
+
+        // Check if the customer with the given ID exists
+        Optional<Customer> customerId = customerService.findById(id);
+        if (customerId.isPresent()) {
+            customerService.delete(id);
+            return "Customer record deleted successfully!";
+        } else {
+            return "Customer not found!";
+        }
     }
 }

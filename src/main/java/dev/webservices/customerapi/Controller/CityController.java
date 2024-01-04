@@ -70,47 +70,10 @@ public class CityController {
         Optional<City> cityId = cityService.findById(id);
         if (cityId.isPresent()) {
             cityService.delete(id);
-            return "City record deleted successfully!";
+            countryService.delete(id);
+            return "City/Country record deleted successfully!";
         } else {
             return "City not found!";
         }
     }
-
-    // // Find country by ID
-    // @GetMapping("/")
-    // public void findCountry(@RequestParam Long id) {
-    // countryService.findById(id);
-    // System.out.println(cityService.toString());
-    // }
-
-    // // Update country
-    // @PutMapping("/")
-    // public void updateCountry(@RequestParam Long id) {
-
-    // Optional<Country> country = countryService.findById(id);
-
-    // // Check if Country with given ID exist
-    // if (country.isPresent()) {
-    // countryService.update(id);
-    // System.out.println("Country updated successfully!");
-    // } else {
-    // System.out.println("Country not found!");
-    // }
-    // }
-
-    // // Delete country
-    // @DeleteMapping("/")
-    // public void deleteCountry(@RequestParam Long id) {
-
-    // Optional<Country> country = countryService.findById(id);
-
-    // // Check if Country with given ID exist
-    // if (country.isPresent()) {
-    // countryService.delete(id);
-    // System.out.println("Country record deleted successfully!");
-    // } else {
-    // System.out.println("Country not found!");
-    // }
-    // }
-
 }
