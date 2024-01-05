@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.webservices.customerapi.Entity.City;
+import dev.webservices.customerapi.Entity.Country;
 import dev.webservices.customerapi.Repository.CityRepository;
 import dev.webservices.customerapi.Repository.CountryRepository;
 
@@ -18,6 +19,7 @@ public class CityServiceImpl implements CityService {
     @Autowired
     private CountryRepository countryRepository;
 
+    // To save city with the country
     @Override
     public City save(City city) {
 
@@ -26,12 +28,26 @@ public class CityServiceImpl implements CityService {
             // if yes, save it
             countryRepository.save(city.getCountry());
         }
-        return cityRepository.save(city);
+
+        // To check if the given city already present
+        Optional<City> existingCity = cityRepository.findByName(city.getName());
+        if (existingCity.isPresent()) {
+            System.out.println("City already present!");
+            return null;
+        } else {
+            return cityRepository.save(city);
+        }
+
     }
 
     @Override
     public Optional<City> findById(Long id) {
         return cityRepository.findById(id);
+    }
+
+    @Override
+    public Optional<City> findByName(String name) {
+        return cityRepository.findByName(name);
     }
 
     @Override

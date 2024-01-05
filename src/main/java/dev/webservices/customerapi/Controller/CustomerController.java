@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import dev.webservices.customerapi.Entity.Customer;
 import dev.webservices.customerapi.Service.CustomerService;
-import jakarta.persistence.Id;
 
 @RestController
 @RequestMapping("/customer")

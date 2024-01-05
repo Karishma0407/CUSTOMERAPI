@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.webservices.customerapi.Entity.City;
-import dev.webservices.customerapi.Entity.Country;
 import dev.webservices.customerapi.Service.CityService;
 import dev.webservices.customerapi.Service.CountryService;
 
@@ -29,7 +28,7 @@ public class CityController {
 
     // Save city in the database
     @PostMapping("/")
-    public String save(@RequestBody City city) {
+    public String saveCity(@RequestBody City city) {
         cityService.save(city);
         return "Saved successfully!";
     }
@@ -49,7 +48,7 @@ public class CityController {
 
     // Update city data
     @PutMapping("/")
-    public String update(@RequestBody City city) {
+    public String updateCity(@RequestBody City city) {
 
         // Check if the city with the given ID present
         Optional<City> cityId = cityService.findById(city.getId());
@@ -64,7 +63,7 @@ public class CityController {
 
     // Delete city
     @DeleteMapping("/")
-    public String delete(@RequestParam Long id) {
+    public String deleteCity(@RequestParam Long id) {
 
         // Check if the city with the given ID present
         Optional<City> cityId = cityService.findById(id);
