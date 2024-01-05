@@ -26,7 +26,15 @@ public class CityServiceImpl implements CityService {
         // do we have country?
         if (city.getCountry() != null) {
             // if yes, save it
-            countryRepository.save(city.getCountry());
+            // To check if the given country already present
+            Optional<Country> existingCountry = countryRepository.findByName(city.getCountry().getName());
+            if (existingCountry.isPresent()) {
+                System.out.println("Country already present!");
+                city.setCountry(existingCountry.get());
+                cityRepository.save(city);
+            } else {
+                countryRepository.save(city.getCountry());
+            }
         }
 
         // To check if the given city already present
