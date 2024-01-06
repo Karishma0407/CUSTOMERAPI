@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@EntityScan(basePackages = { "dev.webservices.customerapi.Entity", "dev.webservices.addresses.Entity" })
 @EnableAutoConfiguration
 public class CustomerapiApplication {
 

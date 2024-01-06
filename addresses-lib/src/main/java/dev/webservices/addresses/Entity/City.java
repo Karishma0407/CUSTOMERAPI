@@ -1,4 +1,4 @@
-package dev.webservices.customerapi.Entity;
+package dev.webservices.addresses.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,16 +13,14 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Address {
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String street;
+    private String name;
 
     @ManyToOne
-    private City city;
-
-    private String postCode;
+    private Country country;
 
 }
