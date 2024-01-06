@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.webservices.customerapi.Entity.Country;
-import dev.webservices.customerapi.Repository.CityRepository;
 import dev.webservices.customerapi.Repository.CountryRepository;
 
 @Service
