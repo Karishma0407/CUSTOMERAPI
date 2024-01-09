@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import dev.webservices.customerapi.Entity.Country;
+import dev.webservices.addresses.Entity.Country;
 
 @Repository
 public interface CountryRepository extends CrudRepository<Country, Long> {

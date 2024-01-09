@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.webservices.customerapi.Entity.City;
+import dev.webservices.addresses.Entity.City;
 import dev.webservices.customerapi.Service.CityService;
 import dev.webservices.customerapi.Service.CountryService;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/city")
@@ -28,51 +31,41 @@ public class CityController {
 
     // Save city in the database
     @PostMapping("/")
-    public String saveCity(@RequestBody City city) {
-        cityService.save(city);
-        return "Saved successfully!";
+    public ResponseEntity<City> saveCity(@RequestBody City city) {
+        City savedCity = cityService.save(city);
+        return savedCity != null
+                ? new ResponseEntity<>(savedCity, HttpStatus.CREATED)
+                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     // Find city by ID
     @GetMapping("/")
-    public City getCity(@RequestParam Long id) {
+    public ResponseEntity<City> getCity(@RequestParam Long id) {
 
         // Check if the city with the given ID present
         Optional<City> cityId = cityService.findById(id);
-        if (cityId.isPresent()) {
-            return cityService.findById(id).get();
-        } else {
-            return null;
-        }
-    }
 
-    // Update city data
-    @PutMapping("/")
-    public String updateCity(@RequestBody City city) {
+        // Do we have a city?
+        return cityId.map(
+                // if yes, send it, with a success code
+                value -> new ResponseEntity<>(value, HttpStatus.ACCEPTED))
 
-        // Check if the city with the given ID present
-        Optional<City> cityId = cityService.findById(city.getId());
-        if (cityId.isPresent()) {
-            cityService.update(city);
-            return "City updated successfully!";
-        } else {
-            return "City not found!";
-        }
-
+                // otherwise: send it an erroe code
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // Delete city
     @DeleteMapping("/")
-    public String deleteCity(@RequestParam Long id) {
+    public ResponseEntity<City> deleteCity(@RequestParam Long id) {
 
         // Check if the city with the given ID present
         Optional<City> cityId = cityService.findById(id);
         if (cityId.isPresent()) {
             cityService.delete(id);
             countryService.delete(id);
-            return "City/Country record deleted successfully!";
+            return new ResponseEntity<>(cityId.get(), HttpStatus.ACCEPTED);
         } else {
-            return "City not found!";
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
     }
 }

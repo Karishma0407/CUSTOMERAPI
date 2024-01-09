@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import dev.webservices.customerapi.Entity.Customer;
 import dev.webservices.customerapi.Service.CustomerService;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -17,49 +20,40 @@ public class CustomerController {
 
     // Save customer data
     @PostMapping("/")
-    public void save(@RequestBody Customer customer) {
-        customerService.save(customer);
-        System.out.println("Customer data saved!");
+    public ResponseEntity<Customer> save(@RequestBody Customer customer) {
+        Customer savedCustomer = customerService.save(customer);
+        return savedCustomer != null
+                ? new ResponseEntity<>(savedCustomer, HttpStatus.CREATED)
+                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     // Find customer using Id
     @GetMapping("/")
-    public Customer getCustomer(@RequestParam Long id) {
+    public ResponseEntity<Customer> getCustomer(@RequestParam Long id) {
 
         // Check if the customer with the given ID exists
         Optional<Customer> customerId = customerService.findById(id);
-        if (customerId.isPresent()) {
-            return customerService.findById(id).get();
-        } else {
-            return null;
-        }
-    }
 
-    // Update customer data
-    @PutMapping("/")
-    public String update(@RequestBody Customer customer) {
+        // do we have a customer?
+        return customerId.map(
+                // if yes: send it, with a success code
+                value -> new ResponseEntity<>(value, HttpStatus.ACCEPTED))
 
-        // Check if the customer with the given ID exists
-        Optional<Customer> customerId = customerService.findById(customer.getId());
-        if (customerId.isPresent()) {
-            customerService.update(customer);
-            return "Customer record updated successfully!";
-        } else {
-            return "Customer not found!";
-        }
+                // otherwise: send it an error code
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // Delete customer data
     @DeleteMapping("/")
-    public String delete(Long id) {
+    public ResponseEntity<Customer> delete(Long id) {
 
         // Check if the customer with the given ID exists
         Optional<Customer> customerId = customerService.findById(id);
         if (customerId.isPresent()) {
             customerService.delete(id);
-            return "Customer record deleted successfully!";
+            return new ResponseEntity<>(customerId.get(), HttpStatus.ACCEPTED);
         } else {
-            return "Customer not found!";
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         }
     }
 }

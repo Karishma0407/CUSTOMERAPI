@@ -2,7 +2,7 @@ package dev.webservices.customerapi.Service;
 
 import java.util.Optional;
 
-import dev.webservices.customerapi.Entity.Country;
+import dev.webservices.addresses.Entity.Country;
 
 public interface CountryService {
 

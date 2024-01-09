@@ -2,7 +2,7 @@ package dev.webservices.customerapi.Service;
 
 import java.util.Optional;
 
-import dev.webservices.customerapi.Entity.City;
+import dev.webservices.addresses.Entity.City;
 
 public interface CityService {
 

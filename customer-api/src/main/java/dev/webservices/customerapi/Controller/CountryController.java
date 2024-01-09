@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.webservices.customerapi.Entity.Country;
+import dev.webservices.addresses.Entity.Country;
 import dev.webservices.customerapi.Service.CountryService;
 
 @RestController
