@@ -1,4 +1,4 @@
-package dev.webservices;
+package dev.webservices.addresses;
 
 public class Main {
     public static void main(String[] args) {

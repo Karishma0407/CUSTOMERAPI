@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import dev.webservices.customerapi.Entity.Customer;
+import dev.webservices.customerslib.Entity.Customer;
 import dev.webservices.customerapi.Service.CustomerService;
 
 import org.springframework.http.HttpStatus;

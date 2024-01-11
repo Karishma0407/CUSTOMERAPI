@@ -13,7 +13,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CustomerAddress {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

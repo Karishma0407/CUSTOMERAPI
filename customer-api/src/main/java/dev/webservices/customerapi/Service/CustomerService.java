@@ -2,7 +2,7 @@ package dev.webservices.customerapi.Service;
 
 import java.util.Optional;
 
-import dev.webservices.customerapi.Entity.Customer;
+import dev.webservices.customerslib.Entity.Customer;
 
 public interface CustomerService {
 

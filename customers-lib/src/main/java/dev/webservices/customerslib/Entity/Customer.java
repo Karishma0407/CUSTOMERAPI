@@ -1,6 +1,6 @@
-package dev.webservices.customerapi.Entity;
+package dev.webservices.customerslib.Entity;
 
-import dev.webservices.addresses.Entity.CustomerAddress;
+import dev.webservices.addresses.Entity.Address;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,6 +24,6 @@ public class Customer {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<CustomerAddress> addresses;
+    private List<Address> addresses;
 
 }

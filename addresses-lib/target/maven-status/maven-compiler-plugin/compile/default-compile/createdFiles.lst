@@ -1,4 +1,6 @@
+dev\webservices\addresses\Entity\Address.class
+dev\webservices\addresses\Utils\Endpoints.class
 dev\webservices\addresses\Entity\City.class
+dev\webservices\addresses\Utils\Messages.class
 dev\webservices\addresses\Entity\Country.class
-dev\webservices\addresses\Entity\CustomerAddress.class
-dev\webservices\Main.class
+dev\webservices\addresses\Main.class
