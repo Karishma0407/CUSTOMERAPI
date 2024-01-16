@@ -22,8 +22,17 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String email;
+    private int age;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Address> addresses;
+
+    public boolean isEligible() {
+        return age > 17;
+    }
+
+    public boolean isValid() {
+        return !firstName.isEmpty() && !lastName.isEmpty() && age > 17;
+    }
 
 }
